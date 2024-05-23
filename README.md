@@ -1,12 +1,12 @@
 ##  HTML to PDF Service
 
-This project provides a serverless function to convert HTML content to PDF documents using Puppeteer. It's deployed on AWS Lambda for a scalable and cost-effective solution.
+This project provides a serverless function to convert HTML content to PDF documents using Puppeteer. It's deployed on Netlify for a scalable and cost-effective solution.
 
 **Features:**
 
 * Effortlessly convert HTML content to PDF format.
 * Includes background graphics for a visually appealing output.
-* Leverages the power of AWS Lambda and the Serverless Framework for deployment.
+* Leverages the power of Netlify and the Serverless Framework for deployment.
 
 ## Prerequisites
 
@@ -25,19 +25,18 @@ The project is organized with the following directory structure:
 1. **Clone the Repository:**
 
    ```bash
-   git clone [[https://github.com/your-username/your-repo.git](https://github.com/ProjectsDevs01/PDF/edit/Netlify)]([https://github.com/your-username/your-repo.git](https://github.com/ProjectsDevs01/PDF/edit/Netlify))
+   git clone https://github.com/your-username/your-repo.git](https://github.com/ProjectsDevs01/PDF/edit/Netlify
 
-
-   cd Netlify
-   nstall Dependencies:
+   ```cd Netlify
+  ``` install Dependencies:
 
 Bash
-npm install
-npm run build  (Optional: Build any pre-deployment assets)
+```npm install
+```npm run build  (Optional: Build any pre-deployment assets)
 Use code with caution.
 content_copy
 Configuration
-The serverless.yml file acts as the configuration blueprint for your AWS Lambda function using the Serverless Framework. Here's a breakdown of its contents:
+The serverless.yml file acts as the configuration blueprint for your Netlify function using the Serverless Framework. Here's a breakdown of its contents:
 
 YAML
 service: html-to-pdf-service
