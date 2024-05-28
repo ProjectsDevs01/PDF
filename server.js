@@ -28,7 +28,7 @@ app.post('/convert', async (req, res) => {
         // Generate PDF with applied CSS
         const pdfBuffer = await page.pdf({
             format: 'A4',
-            printBackground: true // Enable printing background colors and images
+            printBackground: true 
         });
 
         await browser.close();
