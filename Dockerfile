@@ -35,15 +35,11 @@ RUN apt-get update && \
     libxtst6 \
     lsb-release \
     xdg-utils \
-    chromium \
     && rm -rf /var/lib/apt/lists/*
 
 # Run as a non-root user
 RUN useradd -m myuser
 USER myuser
-
-# Install puppeteer-core
-RUN npm install puppeteer-core
 
 # Expose the port on which the app will run
 EXPOSE 8888
