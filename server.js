@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -10,13 +10,12 @@ app.post('/convert', async (req, res) => {
   try {
     const html = req.body;
 
-    // Launch Puppeteer with the path to the installed Chromium
+    // Launch Puppeteer with necessary flags
     const browser = await puppeteer.launch({
-      executablePath: '/usr/bin/chromium',
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
     const page = await browser.newPage();
-
+    
     // Set HTML content
     await page.setContent(html);
 
@@ -26,10 +25,12 @@ app.post('/convert', async (req, res) => {
     // Close the browser
     await browser.close();
 
-    // Set response headers and send PDF
+    // Set response headers
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
-    res.send(pdfBuffer);
+
+    // Send the PDF buffer
+    res.end(pdfBuffer, 'binary');
 
     console.log('PDF generated successfully');
 
