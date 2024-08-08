@@ -10,12 +10,11 @@ app.post('/convert', async (req, res) => {
   try {
     const html = req.body;
 
-    // Launch Puppeteer
+    // Launch Puppeteer with additional configurations
     const browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-});
-
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      timeout: 60000 // Increase timeout for Puppeteer operations
+    });
     const page = await browser.newPage();
     
     // Set HTML content
@@ -32,7 +31,7 @@ app.post('/convert', async (req, res) => {
     res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
 
     // Send the PDF buffer
-    res.end(pdfBuffer);
+    res.end(pdfBuffer, 'binary');
 
     console.log('PDF generated successfully');
 
