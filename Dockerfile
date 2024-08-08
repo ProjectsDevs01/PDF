@@ -37,9 +37,12 @@ RUN apt-get update && \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
+# Run as a non-root user
+RUN useradd -m myuser
+USER myuser
+
 # Expose the port on which the app will run
 EXPOSE 8888
 
 # Start the application
 CMD [ "node", "server.js" ]
-
