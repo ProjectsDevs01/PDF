@@ -1,13 +1,33 @@
-FROM node:alpine
+# Use an Alpine-based Node.js image
+FROM node:22-alpine
 
-WORKDIR /nodejs-docker-aws-ecs
+# Install necessary dependencies
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    freetype-dev \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    nodejs \
+    yarn
 
-COPY package.json .
+# Set the environment variable to use the installed Chromium binary
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
+# Set up the working directory
+WORKDIR /usr/src/app
+
+# Copy package.json and install dependencies
+COPY package.json ./
 RUN npm install
 
+# Copy the rest of the application code
 COPY . .
 
-EXPOSE 3000
+# Expose the port
+EXPOSE 8888
 
-CMD [ "node", "app.js" ]
+# Run the application
+CMD ["node", "server.js"]
