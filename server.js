@@ -12,17 +12,20 @@ app.post('/convert', async (req, res) => {
 
     // Launch Puppeteer with additional configurations
     const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
+      headless: true, // Ensure Puppeteer runs in headless mode
       timeout: 60000, // Increase timeout for Puppeteer operations
-      protocolTimeout: 120000 // Increase protocol timeout
     });
     const page = await browser.newPage();
     
     // Set HTML content
-    await page.setContent(html);
+    await page.setContent(html, { waitUntil: 'networkidle0' });
 
-    // Generate PDF buffer
-    const pdfBuffer = await page.pdf({ format: 'A4' });
+    // Generate PDF buffer with increased timeout
+    const pdfBuffer = await page.pdf({ 
+      format: 'A4',
+      timeout: 120000 // Increase timeout for PDF generation
+    });
 
     // Close the browser
     await browser.close();
