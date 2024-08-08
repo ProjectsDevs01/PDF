@@ -26,5 +26,7 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+EXPOSE 8888
+
 # Run the application
 CMD ["node", "server.js"]
