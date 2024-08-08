@@ -1,7 +1,15 @@
 {
+  "name": "pdf-generator",
+  "version": "1.0.0",
+  "description": "A PDF generator using Puppeteer and Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "body-parser": "^1.20.2",
     "express": "^4.19.2",
-    "puppeteer": "^23.0.1"
+    "puppeteer": "^23.0.1",
+    "body-parser": "^1.20.2"
   }
 }
+
