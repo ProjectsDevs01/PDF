@@ -11,9 +11,7 @@ app.post('/convert', async (req, res) => {
     const html = req.body;
 
     // Launch Puppeteer with necessary flags
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     
     // Set HTML content
