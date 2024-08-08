@@ -49,4 +49,4 @@ RUN npm install puppeteer-core
 EXPOSE 8888
 
 # Start the application
-CMD [ "node", "index.js" ]
+CMD [ "node", "server.js" ]
