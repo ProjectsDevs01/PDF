@@ -1,5 +1,5 @@
 # Use an Alpine-based Node.js image
-FROM node22:alpine
+FROM node:22-alpine
 
 # Install necessary dependencies
 RUN apk add --no-cache \
