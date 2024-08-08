@@ -35,27 +35,15 @@ RUN apt-get update && \
     libxtst6 \
     lsb-release \
     xdg-utils \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Chromium dependencies
-RUN apt-get install -y \
-    libnss3 \
-    libx11-xcb1 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxrandr2 \
-    libxss1 \
-    libxtst6 \
-    libatk-bridge2.0-0 \
-    libgtk-3-0 \
+    chromium \
     && rm -rf /var/lib/apt/lists/*
 
 # Run as a non-root user
 RUN useradd -m myuser
 USER myuser
 
-# Install Puppeteer and its Chromium
-RUN npm install puppeteer
+# Install puppeteer-core
+RUN npm install puppeteer-core
 
 # Expose the port on which the app will run
 EXPOSE 8888
