@@ -13,7 +13,8 @@ app.post('/convert', async (req, res) => {
     // Launch Puppeteer with additional configurations
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      timeout: 60000 // Increase timeout for Puppeteer operations
+      timeout: 60000, // Increase timeout for Puppeteer operations
+      protocolTimeout: 120000 // Increase protocol timeout
     });
     const page = await browser.newPage();
     
