@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -10,10 +10,13 @@ app.post('/convert', async (req, res) => {
   try {
     const html = req.body;
 
-    // Launch Puppeteer
-    const browser = await puppeteer.launch();
+    // Launch Puppeteer with the path to the installed Chromium
+    const browser = await puppeteer.launch({
+      executablePath: '/usr/bin/chromium',
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     const page = await browser.newPage();
-    
+
     // Set HTML content
     await page.setContent(html);
 
@@ -23,12 +26,10 @@ app.post('/convert', async (req, res) => {
     // Close the browser
     await browser.close();
 
-    // Set response headers
+    // Set response headers and send PDF
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
-
-    // Send the PDF buffer
-    res.end(pdfBuffer);
+    res.send(pdfBuffer);
 
     console.log('PDF generated successfully');
 
@@ -42,4 +43,3 @@ app.post('/convert', async (req, res) => {
 app.listen(8888, () => {
   console.log('Server running on port 8888');
 });
-
