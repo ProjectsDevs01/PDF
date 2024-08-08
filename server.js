@@ -10,8 +10,12 @@ app.post('/convert', async (req, res) => {
   try {
     const html = req.body;
 
-    // Launch Puppeteer with necessary flags
-    const browser = await puppeteer.launch();
+    // Launch Puppeteer
+    const browser = await puppeteer.launch({
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+});
+
     const page = await browser.newPage();
     
     // Set HTML content
@@ -28,7 +32,7 @@ app.post('/convert', async (req, res) => {
     res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
 
     // Send the PDF buffer
-    res.end(pdfBuffer, 'binary');
+    res.end(pdfBuffer);
 
     console.log('PDF generated successfully');
 
